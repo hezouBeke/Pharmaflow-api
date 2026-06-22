@@ -1,0 +1,20 @@
+{
+  "name": "pharmacy-api",
+  "version": "1.0.0",
+  "description": "API REST de gestion de pharmacie — stock, ventes, clients et utilisateurs avec authentification JWT.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hezouBeke/pharmacy-api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hezouBeke/pharmacy-api/issues"
+  },
+  "homepage": "https://github.com/hezouBeke/pharmacy-api#readme"
+}
