@@ -4,7 +4,7 @@
   "description": "API REST de gestion de pharmacie — stock, ventes, clients et utilisateurs avec authentification JWT.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon index.js"
   },
   "repository": {
     "type": "git",
