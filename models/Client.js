@@ -12,4 +12,4 @@ const clientSchema = new mongoose.Schema({
     timestamps : true,
 });
 
-module.exports = mongoose.Model("Client", clientSchema);
+module.exports = mongoose.model("Client", clientSchema);
