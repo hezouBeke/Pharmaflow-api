@@ -7,6 +7,13 @@ const clientSchema = new mongoose.Schema({
     password : { type : String, required : true , unique : true },
     age :{ type : Number, required : true },
     tel : { type : String, required : true },
+
+
+    Assurance : {
+      ref : 'Assurance',
+      type : mongoose.Schema.Types.ObjectId,
+      required : false,
+    }
 },
   {
     timestamps : true,
