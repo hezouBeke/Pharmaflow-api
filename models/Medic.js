@@ -19,4 +19,4 @@ const medicSchema = new mongoose.Schema(
 }
 );
 
-module.exports = mongoose.Model("Medicament", medicSchema);
+module.exports = mongoose.model("Medicament", medicSchema);
