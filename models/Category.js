@@ -9,4 +9,4 @@ const catSchema = new mongoose.Schema({
 }
 );
 
-module.exports =  mongoose.model('Category', catSchemla);
+module.exports =  mongoose.model('Category', catSchema);
