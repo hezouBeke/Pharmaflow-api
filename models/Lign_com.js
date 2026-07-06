@@ -7,10 +7,12 @@ const Lign_comSchema = new mongoose.Schema({
     vente : {
         ref : 'Vente',
         type : mongoose.Schema.Types.ObjectId,
+        required : true,
     },
     medicament : {
         ref : 'Medicament',
         type : mongoose.Schema.Types.ObjectId,
+        required : true,
     }
 },
 {
