@@ -1,14 +1,14 @@
 require("dotenv").config();
-
 const mongoose = require("mongoose");
-
 const express = require("express");
-
 const app = express();
 
+const medicRouter = require("./routes/MedicRoute");
+const authRouter = require("./routes/authRoute");
 
 app.use(express.json());
-
+app.use("/medic", medicRouter);
+app.use("/auth",authRouter);
 
 
 mongoose.connect(process.env.MONGO_URI)

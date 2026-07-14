@@ -11,3 +11,4 @@ exports.createMedic = async (medicData) => {
     await medic.save();
     return medic;
 };
+
