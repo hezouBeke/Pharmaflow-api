@@ -11,7 +11,10 @@ exports.createMedic = async (medicData) => {
     await medic.save();
     return medic;
 };
+
 exports.getMedicById = async (id) => {
+    try {
+    }catch (err) {}
     
 }
 
