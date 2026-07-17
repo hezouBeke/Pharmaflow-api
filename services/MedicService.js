@@ -12,9 +12,10 @@ exports.createMedic = async (medicData) => {
     return medic;
 };
 
-exports.getMedicById = async (id) => {
-    try {
-    }catch (err) {}
+// exports.getMedicById = async (id) => {
+//     try {
+
+//     }catch (err) {}
     
-}
+// }
 
