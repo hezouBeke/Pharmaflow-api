@@ -51,6 +51,17 @@ exports.deleteMedic = async (req, res) =>{
         res.json({ message :"Medicament supprimé avec succès !"});
 
     }catch(err){
-        res.staus(500).json({ message : err.message })
+        res.staus(500).json({ message : err.message });
+    }
+}
+
+exports.checkQuantity = async (req, res) => {
+    try {
+        await Medicament.findById(req.params.id);
+        if (Medicament.qte_disp < 10)
+            return json({ message : "Ce medicament est en quantité insuffisante , veuillez vous reaprovisionner !"});
+
+    }catch(err){
+        res.staus(500).json({ message : err.message });
     }
 }

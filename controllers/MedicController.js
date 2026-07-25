@@ -22,11 +22,11 @@
 
  exports.getOne = async (req, res) => {
      try {
-        await MedicService.getMedicById();
+        await MedicService.getMedicById();E
        }catch(err){
         res.satus(500).json({ message : err.message});
     };
-
+ 
  };
 
  exports.update = async(req, res) => {
@@ -38,7 +38,7 @@
     };
  };
 
- esports.delete = async(req, res) => {
+ exports.delete = async(req, res) => {
       try {
         await MedicService.deleteMedic();
        }catch(err){

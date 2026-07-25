@@ -5,10 +5,12 @@ const app = express();
 
 const medicRouter = require("./routes/MedicRoute");
 const authRouter = require("./routes/authRoute");
+const authorize = require("./middleware/authorize");
+const authMidlleware = require("./middleware/authMiddlware");
 
 app.use(express.json());
-app.use("/medic", medicRouter);
-app.use("/auth",authRouter);
+app.use("/medic", authMidlleware , authorize, medicRouter, );
+app.use("/auth" , authRouter);
 
 
 mongoose.connect(process.env.MONGO_URI)
