@@ -46,3 +46,11 @@
     };
  };
 
+
+ exports.checkQuantityMedic = async(req, res) => {
+    try {
+        await MedicService.checkQuantity();
+    }catch(err){
+        res.satus(500).json({ message : err.message});
+    };
+ };
