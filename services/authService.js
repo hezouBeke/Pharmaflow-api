@@ -1,4 +1,4 @@
-const bcrtypt = require('bcryptjs');
+const bcrypt = require('bcryptjs');
 
 const jwt = require("jsonwebtoken");
 
@@ -16,7 +16,7 @@ exports.loginUser = async (email, password) => {
 
     if(!user)  throw new Error("Email incorrecte");
 
-    const isMatch = await bcrtypt.compare(password, user.password);
+    const isMatch = await bcrypt.compare(password, user.password);
     if(!isMatch) throw new Error("Mot de passe incorrecte");
 
     const token = jwt.sign({ id: user._id, role: user.role}, process.env.JWT_SECRET, { expiresIn: "1d" });
