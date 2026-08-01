@@ -6,62 +6,38 @@ exports.createMedic = async (medicData) => {
     if (!categoryExists) {
         throw new Error("Catégorie introuvable");
     }
-
     const medic = new Medicament({ ...medicData });
     await medic.save();
     return medic;
 };
 
+exports.getAllMedic = async () => {
+    return await Medicament.find();
+};
 
-exports.getAllmedic = async (req, res) => {
-    try{
-        const medics = Medicament.find();
-        res.json(medics);
-    }catch (err) {
-        res.staus(500).json({ message : err.message});
+exports.getMedicById = async (id) => {
+    const medic = await Medicament.findById(id);
+    if (!medic) throw new Error("Médicament introuvable");
+    return medic;
+};
+
+exports.updateMedic = async (id, updateData) => {
+    const medic = await Medicament.findByIdAndUpdate(id, updateData, { new: true });
+    if (!medic) throw new Error("Médicament introuvable");
+    return medic;
+};
+
+exports.deleteMedic = async (id) => {
+    const medic = await Medicament.findByIdAndDelete(id);
+    if (!medic) throw new Error("Médicament introuvable");
+    return medic;
+};
+
+exports.checkQuantity = async (id) => {
+    const medic = await Medicament.findById(id);
+    if (!medic) throw new Error("Médicament introuvable");
+    if (medic.qte_dispo < 10) {
+        return { alert: true, message: "Quantité insuffisante, réapprovisionnement nécessaire" };
     }
-}
-
-
-
-exports.getMedicById = async (req, res) => {
-    try {
-        const medic = await Medicament.findById(req.params.id) ;
-        res.json(medic);
-    }catch (err) {
-        res.staus(500).json({ message : err.message });
-    }
-    
-}
-
-
-exports.updateMedic = async (req, res) => {
-    try {
-        await Medicament.findByIdAndUpdate(req.params.id);
-        res.json(this.updateMedic);
-    }catch(err){
-        res.staus(500).json({ message : err.message });
-    }
-}
-
-
-exports.deleteMedic = async (req, res) =>{
-    try{
-        await Medicament.findByIdAndDelete(req.params.id);
-        res.json({ message :"Medicament supprimé avec succès !"});
-
-    }catch(err){
-        res.staus(500).json({ message : err.message });
-    }
-}
-
-exports.checkQuantity = async (req, res) => {
-    try {
-        await Medicament.findById(req.params.id);
-        if (Medicament.qte_disp < 10)
-            return json({ message : "Ce medicament est en quantité insuffisante , veuillez vous reaprovisionner !"});
-
-    }catch(err){
-        res.staus(500).json({ message : err.message });
-    }
-}
+    return { alert: false, message: "Stock suffisant" };
+};
