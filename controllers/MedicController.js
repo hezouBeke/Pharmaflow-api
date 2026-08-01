@@ -1,56 +1,55 @@
- const MedicService = require("../services/MedicService");
+const MedicService = require("../services/MedicService");
 
- exports.create = async (req, res) => {
-    try{
-        await MedicService.createMedic(req.body);
-        res.json({message : "Medicament ajouté avec succès ✅"})
-
-    }catch(err){
-        res.satus(500).json({ message : err.message});
-    };
-
- };
-
- exports.get = async (req, res) => {
+exports.create = async (req, res) => {
     try {
-        await MedicService.getAllmedic();
-        res.json({message : "liste des medicaments ajoutés"});
-       }catch(err){
-        res.satus(500).json({ message : err.message});
+        const medic = await MedicService.createMedic(req.body);
+        res.json({ message: "Médicament ajouté avec succès ✅", medic });
+    } catch (err) {
+        res.status(500).json({ message: err.message });
     }
- };
+};
 
- exports.getOne = async (req, res) => {
-     try {
-        await MedicService.getMedicById();E
-       }catch(err){
-        res.satus(500).json({ message : err.message});
-    };
- 
- };
-
- exports.update = async(req, res) => {
+exports.get = async (req, res) => {
     try {
-        await MedicService.updateMedicc();
-        res.json({ message : "Medicaemnt mis a jour avec succès !" });
-       }catch(err){
-        res.satus(500).json({ message : err.message});
-    };
- };
+        const medics = await MedicService.getAllMedic();
+        res.json(medics);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+};
 
- exports.delete = async(req, res) => {
-      try {
-        await MedicService.deleteMedic();
-       }catch(err){
-        res.satus(500).json({ message : err.message});
-    };
- };
-
-
- exports.checkQuantityMedic = async(req, res) => {
+exports.getOne = async (req, res) => {
     try {
-        await MedicService.checkQuantity();
-    }catch(err){
-        res.satus(500).json({ message : err.message});
-    };
- };
+        const medic = await MedicService.getMedicById(req.params.id);
+        res.json(medic);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+};
+
+exports.update = async (req, res) => {
+    try {
+        const medic = await MedicService.updateMedic(req.params.id, req.body);
+        res.json({ message: "Médicament mis à jour avec succès ✅", medic });
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+};
+
+exports.delete = async (req, res) => {
+    try {
+        await MedicService.deleteMedic(req.params.id);
+        res.json({ message: "Médicament supprimé avec succès ✅" });
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+};
+
+exports.checkQuantityMedic = async (req, res) => {
+    try {
+        const result = await MedicService.checkQuantity(req.params.id);
+        res.json(result);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+};
