@@ -5,7 +5,7 @@ exports.register = async (req, res) => {
         await authService.registerUser(req.body);
         res.json({ message : "Compte créé ✅"});
     }catch(err){
-        res.status(500).json({message : err.message});
+        res.status(400).json({message : err.message});
     }
 };
 
@@ -13,7 +13,8 @@ exports.login = async (req, res) => {
     try{
         const { email, password } = req.body;
         const token = await authService.loginUser(email, password);
+        res.json({ token });
     }catch(err){
-        res.status(500).json({ messsage : err.message });
+        res.status(400).json({ messsage : err.message });
     }
 }
