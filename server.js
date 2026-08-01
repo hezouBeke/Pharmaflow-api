@@ -9,7 +9,7 @@ const authorize = require("./middleware/authorize");
 const authMidlleware = require("./middleware/authMiddlware");
 
 app.use(express.json());
-app.use("/medic", authMidlleware , authorize, medicRouter, );
+app.use("/medic", authMidlleware , medicRouter, );
 app.use("/auth" , authRouter);
 
 
