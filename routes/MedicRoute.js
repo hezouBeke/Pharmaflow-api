@@ -1,12 +1,14 @@
 const express = require("express");
 const router = express.Router();
-const MedicController = require("../controllers/MedicController");
+const medicController = require("../controllers/MedicController");
 const authorize = require("../middleware/authorize");
 
-router.post("/createMedic", authorize(['admin']), MedicController.create);
-router.get("/getAll", MedicController.get);
-router.get("/:id", MedicController.getOne);
-router.put("/:id", authorize(['admin']), MedicController.update);
-router.delete("/:id", authorize(['admin']), MedicController.delete);
+router.get("/", medicController.get);
+router.get("/:id", medicController.getOne);
+router.get("/:id/check-stock", medicController.checkQuantityMedic);
+
+router.post("/", authorize(["admin"]), medicController.create);
+router.put("/:id", authorize(["admin"]), medicController.update);
+router.delete("/:id", authorize(["admin"]), medicController.delete);
 
 module.exports = router;
