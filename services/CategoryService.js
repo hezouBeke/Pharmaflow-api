@@ -29,5 +29,4 @@
     const cats = await Category.findByIdAndDelete(id);
     if(!cats) throw new Error("Catégorie introuvable");
     return cats;
-
  };
