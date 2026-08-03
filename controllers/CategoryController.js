@@ -8,5 +8,15 @@ exports.create = async (req, res) => {
     
     }catch (err) {
         res.status(500).json({ message: err.message });
-    }
+    };
+};
+
+exports.get = async (req, res) => {
+    try {
+        const categories = await CategoryService.getAllCategory();
+        res.json(categories);
+    }catch (err) {
+        res.status(500).json({ message: err.message });
+    };
+
 };
