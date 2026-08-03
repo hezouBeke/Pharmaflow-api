@@ -5,3 +5,10 @@
     await category.save();
     return category;
  };
+
+
+ exports.getAllCategory = async () => {
+    return await Category.find();
+
+ };
+ 
