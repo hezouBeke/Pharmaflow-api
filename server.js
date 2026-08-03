@@ -4,12 +4,16 @@ const express = require("express");
 const app = express();
 
 const medicRouter = require("./routes/MedicRoute");
+const catRouter = require("./routes/CatRoute");
+
+
 const authRouter = require("./routes/authRoute");
 const authorize = require("./middleware/authorize");
 const authMidlleware = require("./middleware/authMiddlware");
 
 app.use(express.json());
 app.use("/medic", authMidlleware , medicRouter, );
+app.use("/category", authMidlleware , catRouter);
 app.use("/auth" , authRouter);
 
 
