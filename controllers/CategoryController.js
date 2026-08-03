@@ -20,3 +20,12 @@ exports.get = async (req, res) => {
     };
 
 };
+
+exports.getOne = async (req, res) => {
+    try {
+        const category = await CategoryService.getCategoryById(req.params.id);
+        res.json(category);
+    }catch (err) {
+        res.status(500).json({ message: err.message });
+    };
+};
