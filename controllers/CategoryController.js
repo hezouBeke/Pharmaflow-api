@@ -39,3 +39,13 @@ exports.update = async (req, res) => {
         res.status(500).json({ message: err.message });
     };
 };
+
+exports.delete = async (req, res) => {
+    try {
+        const category = await CategoryService.deleteCategory(req.params.id);
+        res.json({ message: "Catégorie supprimée avec succès ✅", category });
+    }catch (err) {
+        res.status(500).json({ message: err.message });
+    };
+
+};
