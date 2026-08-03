@@ -11,4 +11,10 @@
     return await Category.find();
 
  };
- 
+
+ exports.getCategoryById = async (id) => {
+    const cats = await Category.findById(id);
+    if(!cats) throw new Error("Catégorie introuvable");
+    return cats;
+
+ };
