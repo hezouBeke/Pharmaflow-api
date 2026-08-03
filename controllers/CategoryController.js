@@ -29,3 +29,13 @@ exports.getOne = async (req, res) => {
         res.status(500).json({ message: err.message });
     };
 };
+
+exports.update = async (req, res) => {
+    try {
+        const category = await CategorySevice.updateCategory(req.params.id, req.body);
+        res.json({ message: "Catégorie mise à jour avec succès ✅", category });
+
+    }catch (err) {
+        res.status(500).json({ message: err.message });
+    };
+};
