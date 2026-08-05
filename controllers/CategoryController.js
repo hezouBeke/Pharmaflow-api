@@ -16,7 +16,7 @@ exports.get = async (req, res) => {
         const categories = await CategoryService.getAllCategory();
         res.json(categories);
     }catch (err) {
-        // res.status(500).json({ message: err.message });
+        res.status(500).json({ message: err.message });
     };
 
 };
