@@ -20,7 +20,7 @@
 
 
  exports.updateCategory = async (id, updateData) => {
-    constcats = await Category.findByIdAndUpdate(id, updateData, { new: true });
+    const cats = await Category.findByIdAndUpdate(id, updateData, { new: true });
     if(!cats) throw new Error("Catégorie introuvable");
     return cats;
  };
