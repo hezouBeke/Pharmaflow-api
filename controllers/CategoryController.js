@@ -32,7 +32,7 @@ exports.getOne = async (req, res) => {
 
 exports.update = async (req, res) => {
     try {
-        const category = await CategorySevice.updateCategory(req.params.id, req.body);
+        const category = await CategoryService.updateCategory(req.params.id, req.body);
         res.json({ message: "Catégorie mise à jour avec succès ✅", category });
 
     }catch (err) {
