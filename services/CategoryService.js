@@ -9,7 +9,6 @@
 
  exports.getAllCategory = async () => {
     return await Category.find();
-
  };
 
  exports.getCategoryById = async (id) => {
