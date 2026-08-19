@@ -4,7 +4,7 @@ const Client = require('../models/Client');
 exports.createClient = async (clientData) => {
     const client = new Client({ ...clientData });
     await client.save();
-    return client;
+    return client
 };
 
 exports.getAllClients = async () => {
