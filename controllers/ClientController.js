@@ -14,7 +14,7 @@ exports.create = async (req, res) => {
 
 exports.get = async (req, res) => {
     try{
-        const clients = await clientService.getAllClients();
+        const clients = await ClientService.getAllClients();
         res.json(clients);
 
     }catch (err) {
