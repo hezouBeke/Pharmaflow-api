@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const venteSchema = new mongoose.Schema({
     date: { type: Date, default: Date.now },
-    montantTotal: { type: Number, required: true },
+    montantTotal: { type: Number , default: 0 },
     status: {
         type: String,
         enum: ['en cours', 'terminée', 'annulée'],
