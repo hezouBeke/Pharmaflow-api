@@ -1,24 +1,27 @@
 const mongoose = require("mongoose");
 
-
-const Lign_comSchema = new mongoose.Schema({
-    quantity : { type : Number, required : true },
-    price : { type : Number, required : true },
-    vente : {
-        ref : 'Vente',
-        type : mongoose.Schema.Types.ObjectId,
-        required : true,
+const LignSchema = new mongoose.Schema({ 
+    vente: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Vente',
+        required: true,
     },
-    medicament : {
-        ref : 'Medicament',
-        type : mongoose.Schema.Types.ObjectId,
-        required : true,
-    }
-},
-{
-    timestamps : true,
-}
-);
+    medicament: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Medicament',
+        required: true,
+    },
+    quantite: {
+        type: Number,
+        required: true,
+    },
+    prixUnitaire: {
+        type: Number,
+        required: true,
+    },
+   
+},{
+    timestamps: true
+});
 
-
-module.exports = mongoose.model("Lign_com", Lign_comSchema);
+module.exports = mongoose.model("Lign_com", LignSchema);
