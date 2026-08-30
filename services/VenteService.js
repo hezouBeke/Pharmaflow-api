@@ -1,14 +1,13 @@
-const Vente =require('../models/Vente');
+const Vente = require('../models/Vente');
 const Lign_com = require('../models/Lign_com');
 const Medicament = require('../models/Medicament');
-
 
 exports.createVente = async (venteData, vendeurId) => {
     const { client, lignes } = venteData;
 
-    if(!client || !lignes || lignes.length === 0) {
+    if (!client || !lignes || lignes.length === 0) {
         throw new Error("Client and lignes are required");
-    };
+    }
 
     const vente = new Vente({
         client,
@@ -17,7 +16,6 @@ exports.createVente = async (venteData, vendeurId) => {
         status: 'en cours'
     });
     await vente.save();
-    const vente = await Vente.findById(id);
 
     let totalAmount = 0;
 
@@ -25,28 +23,29 @@ exports.createVente = async (venteData, vendeurId) => {
         const medicament = await Medicament.findById(ligne.medicament);
         if (!medicament) {
             throw new Error("Medicament not found");
-        };
+        }
 
-        if (medicament.qte_dispo < ligne.qte) {
-            throw new Error ("Stock insuffisant pour le médicament: " + medicament.name);
-        };
+        if (medicament.qte_dispo < ligne.quantite) {
+            throw new Error("Stock insuffisant pour le médicament: " + medicament.name);
+        }
 
-        const LigneCom = new Lign_com({
+        const ligneCom = new Lign_com({
             vente: vente._id,
             medicament: ligne.medicament,
-            quantite: ligne.qte,
-            prixUnitaire: medicament.prix_vente
+            quantite: ligne.quantite,
+            prixUnitaire: medicament.prix_unit
         });
-        await LigneCom.save();
-        const sousTotal = ligne.qte * medicament.prix_vente;
+        await ligneCom.save();
+
+        const sousTotal = ligne.quantite * medicament.prix_unit;
         totalAmount += sousTotal;
-        medicament.qte_dispo -= ligne.qte;
+
+        medicament.qte_dispo -= ligne.quantite;
         await medicament.save();
-    };
+    }
 
     vente.montantTotal = totalAmount;
     await vente.save();
 
-    
-  
+    return vente;
 };
