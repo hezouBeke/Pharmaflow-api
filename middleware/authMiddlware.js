@@ -14,7 +14,7 @@ module.exports = (req, res, next) => {
         req.user = decoded;
         next();
     } catch (error) {
-        console.log("Erreur JWT :", err.message);
+        console.log("Erreur JWT :", error.message);
         res.status(400).json({ message : "Invalid token" });
     }
 };

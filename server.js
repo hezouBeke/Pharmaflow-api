@@ -6,6 +6,7 @@ const app = express();
 const medicRouter = require("./routes/MedicRoute");
 const catRouter = require("./routes/CatRoute");
 const clientRoute = require("./routes/ClientRoute");
+const venteRoute = require("./routes/VenteRoute");
 
 
 const authRouter = require("./routes/authRoute");
@@ -16,6 +17,7 @@ app.use(express.json());
 app.use("/medic", authMidlleware , medicRouter, );
 app.use("/category", authMidlleware , catRouter);
 app.use("/client", authMidlleware , clientRoute );
+app.use("/vente", authMidlleware , venteRoute );
 
 app.use("/auth" , authRouter);
 
