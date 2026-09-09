@@ -12,3 +12,30 @@ exports.create = async (req, res) => {
     };
 };
 
+
+exports.get = async (req, res) => {
+
+    try{
+        const ventes = await venteService.getAllVentes();
+        res.json({ ventes });
+
+    }catch(error){
+        res.status(500).json({ message: "Erreur lors de la récupération des ventes", error });
+    }
+
+};
+
+exports.getOne = async (req, res) => {
+    try{
+        const vente = await venteService.getVenteById(req.params.id);
+        if(!vente) return res.status(404).json({ message: "Vente introuvable" });
+        res.json({ vente });    
+
+    }catch(error){
+        res.status(500).json({ message: "Erreur lors de la récupération de la vente", error });
+    }
+
+};
+
+
+
