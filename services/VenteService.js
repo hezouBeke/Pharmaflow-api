@@ -53,6 +53,13 @@ exports.createVente = async (venteData, vendeurId) => {
 
 exports.getAllVentes = async () => {
     const ventes = await Vente.find();
-    if (ventes.length === 0) throw new Error("Aucune vente trouvée");
     return ventes;
+};
+
+exports.getVenteById = async (id) => {
+    const lignes = await Lign_com.find({ vente: id }).populate('medicament');
+    const vente = await Vente.findById(id);
+
+    if (!vente) throw new Error("Vente non trouvée");
+    return { vente, lignes };
 };
