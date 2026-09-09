@@ -49,3 +49,10 @@ exports.createVente = async (venteData, vendeurId) => {
 
     return vente;
 };
+
+
+exports.getAllVentes = async () => {
+    const ventes = await Vente.find();
+    if (ventes.length === 0) throw new Error("Aucune vente trouvée");
+    return ventes;
+};
