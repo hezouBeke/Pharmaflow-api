@@ -6,7 +6,7 @@ exports.create = async (req, res) => {
         res.json({ message: "Médicament ajouté avec succès ✅", medic });
     } catch (err) {
         res.status(500).json({ message: err.message });
-    }
+    };
 };
 
 exports.get = async (req, res) => {
@@ -15,7 +15,7 @@ exports.get = async (req, res) => {
         res.json(medics);
     } catch (err) {
         res.status(500).json({ message: err.message });
-    }
+    };
 };
 
 exports.getOne = async (req, res) => {
@@ -24,7 +24,7 @@ exports.getOne = async (req, res) => {
         res.json(medic);
     } catch (err) {
         res.status(500).json({ message: err.message });
-    }
+    };
 };
 
 exports.update = async (req, res) => {
