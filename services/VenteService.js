@@ -63,3 +63,9 @@ exports.getVenteById = async (id) => {
     if (!vente) throw new Error("Vente non trouvée");
     return { vente, lignes };
 }; 
+
+exports.updateVente = async (id, updateData) => {
+    const vente = await Vente.findByIdAndUpdate(id, updateData, { new: true });
+    if (!vente) throw new Error("Vente non trouvée");
+    return vente;
+};

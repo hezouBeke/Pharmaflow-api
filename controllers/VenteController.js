@@ -38,4 +38,22 @@ exports.getOne = async (req, res) => {
 };
 
 
+exports.update = async (req, res) => {
+    try{
+        const vente = await venteService.updateVente(req.params.id, req.body);
+        res.json({ message: "Vente mise à jour avec succès ✅", vente });
+    } catch(error){
+        res.status(500).json({ message: "Erreur lors de la mise à jour de la vente", error: error.message });
+    };
+};
+
+exports.delete = async (req, res) => {
+    try{
+        const vente = await venteService.updateVente(req.params.id, { status: 'annulée' });
+        res.json({ message: "Vente annulée avec succès ✅", vente });
+    } catch(error){
+        res.status(500).json({ message: "Erreur lors de l'annulation de la vente", error: error.message });
+    };
+}
+
 
