@@ -12,7 +12,14 @@ exports.createMedic = async (medicData) => {
 };
 
 exports.getAllMedic = async () => {
-    return await Medicament.find();
+    const  medics  = await Medicament.find();
+    const  medicsChecked = medics.map((medic) => {
+        if(medic.qte_dispo < 10) {
+            return { ...medic.toObject(), alert: true, message: "Quantité insuffisante, réapprovisionnement nécessaire" };
+        }
+        return { ...medic.toObject(), alert: false, message: "Stock suffisant" };
+    });
+    return medicsChecked;
 };
 
 exports.getMedicById = async (id) => {

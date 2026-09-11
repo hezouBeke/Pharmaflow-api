@@ -62,4 +62,4 @@ exports.getVenteById = async (id) => {
 
     if (!vente) throw new Error("Vente non trouvée");
     return { vente, lignes };
-};
+}; 
