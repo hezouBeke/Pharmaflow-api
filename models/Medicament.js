@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 
+
 const MedicSchema = new mongoose.Schema({
     name : { type : String, required : true },
     codebar : {type : String, required : true },
