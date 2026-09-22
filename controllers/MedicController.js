@@ -3,10 +3,13 @@ const MedicService = require("../services/MedicService");
 exports.create = async (req, res) => {
     try {
         const medic = await MedicService.createMedic(req.body);
-        res.json({ message: "Médicament ajouté avec succès ✅", medic });
+        res.status(201).json({ message: "Médicament ajouté avec succès", medic });
     } catch (err) {
-        res.status(500).json({ message: err.message });
-    };
+        if (err.message === "Catégorie introuvable") {
+            return res.status(404).json({ message: err.message });
+        }
+        res.status(500).json({ message: "Erreur serveur" });
+    }
 };
 
 exports.get = async (req, res) => {
