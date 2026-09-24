@@ -1,10 +1,8 @@
 const Joi = require('joi');
 
-
-
 const categoryValidator = Joi.object({
-    name: joi.string().trim().required(),
-    desc: joi.string().trim().min(5).max(200).required()
+    name: Joi.string().trim().required(),
+    desc: Joi.string().trim().min(5).max(200).required()
 
 });
 
