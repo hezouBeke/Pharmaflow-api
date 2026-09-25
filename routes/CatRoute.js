@@ -2,8 +2,10 @@ const express = require('express');
 const router = express.Router();
 const CategoryController = require('../controllers/CategoryController');
 const authorize = require('../middleware/authorize');
+const validate = require('../middleware/validate');
 const categoryValidator = require('../validators/categoryValidator');
 const categoryValidatoroptional = require('../validators/categoryValidatorUpdate');
+
 router.get("/", CategoryController.get);
 router.get("/:id", CategoryController.getOne);
 
