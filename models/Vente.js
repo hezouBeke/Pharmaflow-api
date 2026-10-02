@@ -10,7 +10,7 @@ const venteSchema = new mongoose.Schema({
     client: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Client',
-        required: true,
+        required: false,
     },
     vendeur: {
         type: mongoose.Schema.Types.ObjectId,
