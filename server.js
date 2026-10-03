@@ -10,13 +10,14 @@ const venteRoute = require("./routes/VenteRoute");
 
 
 const authRouter = require("./routes/authRoute");
-const authorize = require("./middleware/authorize");
+
 const authMidlleware = require("./middleware/authMiddlware");
 
 app.use(express.json());
 app.use("/medic", authMidlleware , medicRouter, );
 app.use("/category", authMidlleware , catRouter);
-app.use("/client", authMidlleware , clientRoute );
+// app.use("/client", authMidlleware , clientRoute );
+app.use("/client", clientRoute );
 app.use("/vente", authMidlleware , venteRoute );
 
 app.use("/auth" , authRouter);
