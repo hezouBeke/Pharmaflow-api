@@ -1,3 +1,5 @@
+const Joi = require("joi");
+
 const venteValidator = Joi.object({
     client: Joi.string().pattern(/^[0-9a-fA-F]{24}$/).optional(), 
     lignes: Joi.array().items(
