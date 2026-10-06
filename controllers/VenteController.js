@@ -50,7 +50,7 @@ exports.update = async (req, res) => {
 
 exports.delete = async (req, res) => {
     try {
-        const vente = await VenteService.getVenteById(req.params.id);
+        const vente = await venteService.getVenteById(req.params.id);
         
         if (vente.vente.status === 'terminée' && req.user.role !== 'admin') {
             return res.status(403).json({ message: "Seul un admin peut annuler une vente déjà terminée" });

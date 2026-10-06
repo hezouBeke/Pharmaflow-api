@@ -6,11 +6,12 @@ const authorize = require("../middleware/authorize");
 const validate = require("../middleware/validate");
 
 const venteValidator = require("../validators/venteValidator");
+const updateVenteValidator = require("../validators/venteUpdateValidator");
 
 router.post("/", authorize(["admin", "vendeur"]), validate(venteValidator), venteController.create);
 router.get("/", authorize(["admin", "vendeur"]), venteController.get);
 router.get("/:id", authorize(["admin", "vendeur"]), venteController.getOne);
-router.put("/:id", authorize(["admin", "vendeur"]), validate(venteValidator), venteController.update);
+router.put("/:id", authorize(["admin", "vendeur"]), validate(updateVenteValidator), venteController.update);
 router.delete("/:id", authorize(["admin", "vendeur"]), venteController.delete);
 
 
