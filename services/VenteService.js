@@ -65,7 +65,22 @@ exports.getVenteById = async (id) => {
 }; 
 
 exports.updateVente = async (id, updateData) => {
-    const vente = await Vente.findByIdAndUpdate(id, updateData, { new: true });
+    const vente = await Vente.findById(id);
     if (!vente) throw new Error("Vente non trouvée");
-    return vente;
+
+   
+    if (updateData.status === 'annulée' && vente.status !== 'annulée') {
+        const lignes = await Lign_com.find({ vente: id });
+
+        for (const ligne of lignes) {
+            const medicament = await Medicament.findById(ligne.medicament);
+            if (medicament) {
+                medicament.qte_dispo += ligne.quantite;
+                await medicament.save();
+            }
+        }
+    }
+
+    const venteUpdated = await Vente.findByIdAndUpdate(id, updateData, { new: true });
+    return venteUpdated;
 };
