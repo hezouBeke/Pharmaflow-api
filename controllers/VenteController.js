@@ -47,13 +47,19 @@ exports.update = async (req, res) => {
     };
 };
 
+
 exports.delete = async (req, res) => {
-    try{
-        const vente = await venteService.updateVente(req.params.id, { status: 'annulée' });
-        res.json({ message: "Vente annulée avec succès ✅", vente });
+    try {
+        const vente = await VenteService.getVenteById(req.params.id);
+        
+        if (vente.vente.status === 'terminée' && req.user.role !== 'admin') {
+            return res.status(403).json({ message: "Seul un admin peut annuler une vente déjà terminée" });
+        }
+
+        const venteUpdated = await venteService.updateVente(req.params.id, { status: 'annulée' });
+        res.json({ message: "Vente annulée avec succès ✅", vente: venteUpdated });
     } catch(error){
         res.status(500).json({ message: "Erreur lors de l'annulation de la vente", error: error.message });
     };
 }
-
 
