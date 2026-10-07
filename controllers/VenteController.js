@@ -39,9 +39,15 @@ exports.getOne = async (req, res) => {
 
 
 exports.update = async (req, res) => {
-    try{
-        const vente = await venteService.updateVente(req.params.id, req.body);
-        res.json({ message: "Vente mise à jour avec succès ✅", vente });
+    try {
+        const { vente } = await venteService.getVenteById(req.params.id);
+        
+        if (vente.status === 'terminée' && req.user.role !== 'admin') {
+            return res.status(403).json({ message: "Seul un admin peut modifier une vente déjà terminée" });
+        }
+
+        const venteUpdated = await venteService.updateVente(req.params.id, req.body);
+        res.json({ message: "Vente mise à jour avec succès ✅", vente: venteUpdated });
     } catch(error){
         res.status(500).json({ message: "Erreur lors de la mise à jour de la vente", error: error.message });
     };
