@@ -11,16 +11,28 @@ const venteRoute = require("./routes/VenteRoute");
 
 const authRouter = require("./routes/authRoute");
 
-const authMidlleware = require("./middleware/authMiddlware");
+const authMiddleware = require("./middleware/authMiddlware");
+
+const errorHandler = require("./middleware/errorHandler");
+
+const AppError = require("./utils/AppError");
 
 app.use(express.json());
-app.use("/medic", authMidlleware , medicRouter, );
-app.use("/category", authMidlleware , catRouter);
-// app.use("/client", authMidlleware , clientRoute );
+app.use("/medic", authMiddleware , medicRouter, );
+app.use("/category", authMiddleware , catRouter);
+// app.use("/client", authMiddleware , clientRoute );
 app.use("/client", clientRoute );
-app.use("/vente", authMidlleware , venteRoute );
+app.use("/vente", authMiddleware , venteRoute );
 
 app.use("/auth" , authRouter);
+
+
+app.use((req, res, next) => {
+    next(new AppError("Route introuvable", 404));
+});
+
+app.use(errorHandler);
+
 
 
 mongoose.connect(process.env.MONGO_URI)
