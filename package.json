@@ -4,6 +4,7 @@
   "description": "API REST de gestion de pharmacie — stock, ventes, clients et utilisateurs avec authentification JWT.",
   "main": "index.js",
   "scripts": {
+    "start": "node server.js",
     "dev": "nodemon server.js"
   },
   "repository": {
