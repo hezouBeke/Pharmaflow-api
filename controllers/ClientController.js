@@ -1,51 +1,51 @@
-const ClientService = require('../services/ClientService');
+const ClientService = require("../services/Clientservice");
 
 
 
-exports.create = async (req, res) => {
+exports.create = async (req, res, next) => {
   try{
     const client = await ClientService.createClient(req.body);
     res.json({ message: "Client ajouté avec succès ✅", client });
 
   }catch (err) {
-    res.status(500).json({ message: err.message }); 
+    next(err);
+  }
 };
-}
 
-exports.get = async (req, res) => {
+exports.get = async (req, res, next) => {
     try{
         const clients = await ClientService.getAllClients();
         res.json(clients);
 
     }catch (err) {
-        res.status(500).json({ message: err.message });
+        next(err);
     };
 };
 
 
-exports.getOne = async (req, res) => {
+exports.getOne = async (req, res, next ) => {
     try{
        const client = await ClientService.getClientById(req.params.id);
        res.json(client);
     }catch (err) {
-        res.status(500).json({ message: err.message });
+        next(err);
     };
 };
 
-exports.update = async (req, res) => {
+exports.update = async (req, res, next ) => {
     try{
         const client = await ClientService.updateClient(req.params.id, req.body);
         res.json({ message: "Client mis à jour avec succès ✅", client });
     }catch (err) {
-        res.status(500).json({ message: err.message });
+       next(err);
    };
 }
 
-exports.delete = async (req, res) => {
+exports.delete = async (req, res, next) => {
     try{
         const client = await ClientService.deleteClient(req.params.id);
         res.json({ message: "Client supprimé avec succès ✅", client });
     }catch (err) {
-        res.status(500).json({ message: err.message });
+         next(err);
     };
 };

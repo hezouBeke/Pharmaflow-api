@@ -1,58 +1,55 @@
 const MedicService = require("../services/MedicService");
 
-exports.create = async (req, res) => {
+exports.create = async (req, res, next) => {
     try {
         const medic = await MedicService.createMedic(req.body);
         res.status(201).json({ message: "Médicament ajouté avec succès", medic });
     } catch (err) {
-        if (err.message === "Catégorie introuvable") {
-            return res.status(404).json({ message: err.message });
-        }
-        res.status(500).json({ message: "Erreur serveur" });
+        next(err);
     }
 };
 
-exports.get = async (req, res) => {
+exports.get = async (req, res, next) => {
     try {
         const medics = await MedicService.getAllMedic();
         res.json(medics);
     } catch (err) {
-        res.status(500).json({ message: err.message });
+        next(err);
     };
 };
 
-exports.getOne = async (req, res) => {
+exports.getOne = async (req, res, next ) => {
     try {
         const medic = await MedicService.getMedicById(req.params.id);
         res.json(medic);
     } catch (err) {
-        res.status(500).json({ message: err.message });
+         next(err);
     };
 };
 
-exports.update = async (req, res) => {
+exports.update = async (req, res, next) => {
     try {
         const medic = await MedicService.updateMedic(req.params.id, req.body);
         res.json({ message: "Médicament mis à jour avec succès ✅", medic });
     } catch (err) {
-        res.status(500).json({ message: err.message });
+         next(err);
     }
 };
 
-exports.delete = async (req, res) => {
+exports.delete = async (req, res, next) => {
     try {
         await MedicService.deleteMedic(req.params.id);
         res.json({ message: "Médicament supprimé avec succès ✅" });
     } catch (err) {
-        res.status(500).json({ message: err.message });
+         next(err);
     }
 };
 
-exports.checkQuantityMedic = async (req, res) => {
+exports.checkQuantityMedic = async (req, res, next ) => {
     try {
         const result = await MedicService.checkQuantity(req.params.id);
         res.json(result);
     } catch (err) {
-        res.status(500).json({ message: err.message });
+       next(err);
     }
 };

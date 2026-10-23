@@ -1,51 +1,51 @@
 const CategoryService = require("../services/CategoryService");
 
 
-exports.create = async (req, res) => {
+exports.create = async (req, res, next) => {
     try {
         const category = await CategoryService.createCategory(req.body);
         res.json({ message: "Catégorie ajoutée avec succès ✅", category });
     
     }catch (err) {
-        res.status(500).json({ message: err.message });
+        next(err);
     };
 };
 
-exports.get = async (req, res) => {
+exports.get = async (req, res, next) => {
     try {
         const categories = await CategoryService.getAllCategory();
         res.json(categories);
     }catch (err) {
-        res.status(500).json({ message: err.message });
+        next(err);
     };
 
 };
 
-exports.getOne = async (req, res) => {
+exports.getOne = async (req, res, next) => {
     try {
         const category = await CategoryService.getCategoryById(req.params.id);
         res.json(category);
     }catch (err) {
-        res.status(500).json({ message: err.message });
+        next(err);
     };
 };
 
-exports.update = async (req, res) => {
+exports.update = async (req, res, next) => {
     try {
         const category = await CategoryService.updateCategory(req.params.id, req.body);
         res.json({ message: "Catégorie mise à jour avec succès ✅", category });
 
     }catch (err) {
-        res.status(500).json({ message: err.message });
+        next(err);
     };
 };
 
-exports.delete = async (req, res) => {
+exports.delete = async (req, res, next) => {
     try {
         const category = await CategoryService.deleteCategory(req.params.id);
         res.json({ message: "Catégorie supprimée avec succès ✅", category });
     }catch (err) {
-        res.status(500).json({ message: err.message });
+        next(err);
     };
 
 };
