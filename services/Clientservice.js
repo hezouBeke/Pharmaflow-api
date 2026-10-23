@@ -1,4 +1,5 @@
 const Client = require('../models/Client');
+const AppError = require('../utils/AppError');
 
 
 exports.createClient = async (clientData) => {
@@ -9,24 +10,23 @@ exports.createClient = async (clientData) => {
 
 exports.getAllClients = async () => {
     const clients = await Client.find();
-    if(!clients) throw new Error("Aucun client trouvé");
     return clients;
 };
 
 exports.getClientById = async (id) => {
     const client = await Client.findById(id);
-    if(!client) throw new Error("Client introuvable");
+    if(!client) throw new AppError("Client introuvable", 404);
     return client;
 };
 
 exports.updateClient = async (id, updateData) => {
   const client = await Client.findByIdAndUpdate(id, updateData, { new: true });
-  if(!client) throw new Error("Client introuvable");
+  if(!client) throw new AppError("Client introuvable", 404);
   return client;
 };
 
 exports.deleteClient = async (id) => {
     const client = await Client.findByIdAndDelete(id);
-    if(!client) throw new Error("Client introuvable");
+    if(!client) throw new AppError("Client introuvable", 404);
     return client;
 };
