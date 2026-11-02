@@ -1,6 +1,7 @@
 require("dotenv").config();
 const mongoose = require("mongoose");
 const express = require("express");
+const cors = require("cors");
 const app = express();
 
 const medicRouter = require("./routes/MedicRoute");
@@ -17,7 +18,13 @@ const errorHandler = require("./middleware/errorHandler");
 
 const AppError = require("./utils/AppError");
 
+app.use(cors());
 app.use(express.json());
+
+app.use(cors({
+  origin: 'http://localhost:5173/'
+}));
+
 app.use("/medic", authMiddleware , medicRouter, );
 app.use("/category", authMiddleware , catRouter);
 // app.use("/client", authMiddleware , clientRoute );
